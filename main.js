@@ -15,6 +15,25 @@ entrypoints.setup({
     }
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    
+    function addEventListenerSafely(selector, event, callback) {
+        const element = document.querySelector(selector);
+        if (element) {
+            element.addEventListener(event, callback);
+        } else {
+            console.warn(`Warning: Element ${selector} not found.`);
+        }
+    }
+    addEventListenerSafely('#btnEncrypt', 'click', encryptSelectedLayers);
+    addEventListenerSafely('#retrieve-message', 'click', retrieveMessage);
+    addEventListenerSafely('#btnPopulate', 'click', populateLayers);
+    addEventListenerSafely('#importLayersButton', 'click', importSelectedLayers);
+    addEventListenerSafely('#save-encrypted-image', 'click', saveEncryptedImage);
+
+    console.log('Event listeners successfully added to all required buttons.');
+});
+
 async function showAlert(message) {
     await app.showAlert(message);
 }
@@ -158,6 +177,9 @@ async function getAllLayers() {
     return layers;
 }
 
+document.getElementById('btnPopulate').addEventListener('click', populateLayers);
+document.addEventListener('DOMContentLoaded', populateLayers);
+
 async function populateLayers() {
     try {
         var layers = await executeAsModal(getAllLayers, { commandName: 'Get Layers' });
@@ -204,14 +226,18 @@ function derivePoisonLevel(key) {
     return poisonLevel;
 }
 
+document.getElementById('retrieve-message').addEventListener('click', embedMessageInLayer);
 async function embedMessageInLayer(layer, encryptedMessage) {
     var binaryMessage = stringToBinary(encryptedMessage) + '00000000'; 
     var pixels = await layer.pixelData;
 
     for (let i = 0, j = 0; i < pixels.length && j < binaryMessage.length; i += 4) {
         let red = pixels[i];
+        let alpha = pixels[i + 3];
         let newRed = (red & 0xFE) | parseInt(binaryMessage[j]);
+        let newAlpha = (alpha & 0xFE) | parseInt(binaryMessage[j]);
         pixels[i] = newRed;
+        pixels[i + 3] = newAlpha;
         j++;
     }
 
@@ -255,29 +281,36 @@ setInterval(function() {
 
 }, 100);
 
+document.getElementById('btnEncrypt').addEventListener('click', encryptSelectedLayers);
 async function encryptSelectedLayers() {
+
+    console.log('Encrypt Layer button clicked.');
+
     var selectedLayerIds = Array.from(document.querySelectorAll('#layers input[type="checkbox"]:checked'))
         .map(checkbox => parseInt(checkbox.value));
+    console.log("Selected Layer IDs:", selectedLayerIds);
 
     if (selectedLayerIds.length === 0) {
         await showAlert('Please select at least one layer to encrypt.');
+        console.log('No layers selected. Aborting encryption.');
         return;
     }
 
     var encryptionKey = document.getElementById('encryption-key').value;
     var secretMessage = document.getElementById('secret-message').value;
-
     console.log('Encryption Key:', encryptionKey);
-    console.log('Secret Message', secretMessage);
+    console.log('Secret Message:', secretMessage);
 
     if (!encryptionKey || !secretMessage) {
         await showAlert('Please enter both an encryption key and a secret message.');
+        console.log('Missing encryption key or message.');
         return;
     }
 
-    var encryptedMessage = await encryptMessage(secretMessage, encryptionKey);
-
     try {
+        var encryptedMessage = await encryptMessage(secretMessage, encryptionKey);
+        console.log("Encrypted Message:", encryptedMessage);
+
         await executeAsModal(async () => {
             var activeDocument = app.activeDocument;
 
@@ -288,14 +321,14 @@ async function encryptSelectedLayers() {
         }, { commandName: 'Encrypt Layers' });
 
         await showAlert('Selected layers have been encrypted successfully.');
+        console.log('Encryption completed successfully.');
     } catch (error) {
-        console.error("Error encrypting layers:", error);
+        console.error("Error during encryption:", error);
         await showAlert("Failed to encrypt selected layers.");
     }
-
-    console.log('log status');
 }
 
+// go back to this. tons of problems
 document.getElementById('save-encrypted-image').addEventListener('click', saveEncryptedImage);
 async function saveEncryptedImage() {
     console.log('log status');
@@ -312,7 +345,7 @@ async function saveEncryptedImage() {
         });
 
         if (!saveLocation) {
-            // User canceled the save dialog
+            // User canceled the save dialog womp womp
             return;
         }
 
@@ -369,8 +402,5 @@ async function retrieveMessage() {
     }
 }
 
-document.getElementById('retrieve-message').addEventListener('click', embedMessageInLayer);
 
-document.getElementById('btnPopulate').addEventListener('click', populateLayers);
-document.getElementById('btnEncrypt').addEventListener('click', encryptSelectedLayers);
-document.addEventListener('DOMContentLoaded', populateLayers);
+
