@@ -1,0 +1,132 @@
+
+Belladonna/
+│
+├── index.html
+├── main.js
+└── style.css
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+sp-heading {
+  margin-bottom: 20px;
+  text-align: center;
+  white-space: normal; 
+  word-wrap: break-word; 
+  overflow-wrap: break-word; 
+  font-size: 1.5em; 
+  color: #333333;
+}
+
+sp-textfield {
+  width: 100%;
+  margin-bottom: 20px;
+  font-size: 1em;
+}
+
+sp-body#layers {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  font-size: 1em;
+  color: #555555;
+}
+
+
+footer {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.small-text {
+  font-size: 0.75em;
+  color: gray;
+  margin-top: 20px; /* Increases spacing from buttons */
+  text-align: center;
+}
+
+sp-button {
+  flex: 1 1 45%;
+  padding: 10px;
+  font-size: 1em;
+  white-space: nowrap; 
+  text-overflow: ellipsis; 
+  overflow: hidden;
+}
+
+
+sp-button[variant="primary"] {
+  background-color: #9b66b2;
+  color: white;
+}
+
+sp-button[variant="primary"] {
+  background-color: #9b66b2;
+  color: white;
+}
+
+sp-button[variant="secondary"] {
+  background-color: #9b66b2;
+  color: white;
+}
+
+sp-button[variant="primary"] {
+  background-color: #9b66b2; 
+  color: white;
+}
+
+sp-button[variant="tertiary"] {
+  background-color: #9b66b2;
+  color: white;
+}
+
+sp-button[variant="tertiary"] {
+  background-color: #9b66b2;
+  color: white;
+}
+
+@media (max-width: 500px) {
+  .container {
+      padding: 10px;
+  }
+
+  sp-heading {
+      font-size: 1.2em;
+  }
+
+  sp-button {
+      flex: 1 1 100%; 
+  }
+}
+
+sp-heading, sp-body#layers {
+  word-break: break-word;
+  hyphens: auto;
+}
