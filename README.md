@@ -1,9 +1,9 @@
 # Introduction
 
 Hello, and thank you for downloading! Belladonna is an Adobe Photoshop plugin designed to protect digital artworks from unauthorized AI model training. Working on both the layer blending modes and the alpha channel of your PNG, this plugin aims to protect your images by embedding encrypted layers and imperceptible watermarks in the file type. Despite not altering the appearance of your work, the encryption provides an extra layer of security against stable diffusion training.
-How this works:
 
-The Belladonna plugin utilizes low-level XOR and blend mode encryption to implement noise into selected layers. In addition, encryption pretaining to your message and secret key are embedded into the PNG's metadata. This helps to ensure that if the image ever were to be scraped, the unique message and secret key can be decrypted to verify authorship or provide traceability. The process does not visually alter your work but introduces subtle, imperceptible distortions within the data structure, making it difficult for unauthorized AI models to parse and utilize the image for training purposes. Here's a breakdown of how Belladonna achieves this:
+
+How this works: The Belladonna plugin utilizes low-level XOR and blend mode encryption algorithms to implement noise into selected layers. In addition, encryption pretaining to your message and secret key are embedded into the PNG's metadata. This helps to ensure that if the image ever were to be scraped, the unique message and secret key can be decrypted to verify authorship or provide traceability. The process does not visually alter your work but introduces subtle, imperceptible distortions within the data structure, making it difficult for unauthorized AI models to parse and utilize the image for training purposes. Here's a breakdown of how Belladonna achieves this:
 
 **Layer Encryption**
    
