@@ -41,7 +41,7 @@ Since Photoshop 23.5.5
 
 4 - Run the plugin by going to the "Plugins" menu within Photoshop.
 
-5 - Encrypt your files, add some distortion, and save to your machine.
+5 - Encrypt your files, add some distortion (if you want), and save to your computer.
 
 
 ## Documentation
