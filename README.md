@@ -49,3 +49,4 @@ Since Photoshop 23.5.5
 NOTE: No matter what level of sophistication this Photoshop plug-in achieves in the future, it cannot guarantee your work full protection from being scraped, used in AI training databases, or successfully mimicked by an AI model. This is simply a preventative tool that somehow managed to kinda work.
 
 ![BDComparison copy](https://github.com/user-attachments/assets/144ab6c2-c0ce-4660-b65d-a72aa01b42b1)
+![BDComparison1](https://github.com/user-attachments/assets/5ec6c2bc-5d43-4302-8536-b33773d6b48b)
