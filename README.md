@@ -1,17 +1,17 @@
 # Introduction
 
-Hello, and thank you for downloading! Belladonna is an Adobe Photoshop plugin designed to protect digital artworks from unauthorized AI model training. Working on both the layer blending modes and the alpha channel of your PNG, this plugin aims to protect your images by embedding encrypted layers and imperceptible watermarks in the file type. Despite not altering the appearance of your work, the encryption provides an extra layer of security against stable diffusion training.
+Hello, and thank you for downloading! Belladonna is an Adobe Photoshop plugin designed to protect digital artworks from unauthorized AI model training. Working on both the layer blending modes and the pixel data of your PNG, this plugin aims to protect your images by embedding encrypted layers and imperceptible watermarks in the file type. Despite not altering the appearance of your work, the encryption provides an extra layer of security against stable diffusion training.
 
 
 How this works: The Belladonna plugin utilizes low-level XOR and blend mode encryption algorithms to implement noise into selected layers. In addition, encryption pretaining to your message and secret key are embedded into the PNG's metadata. This helps to ensure that if the image ever were to be scraped, the unique message and secret key can be decrypted to verify authorship or provide traceability. The process does not visually alter your work but introduces subtle, imperceptible distortions within the data structure, making it difficult for unauthorized AI models to parse and utilize the image for training purposes. Here's a breakdown of how Belladonna achieves this:
 
-**Layer Encryption**
+**Blend Mode Encryption**
    
   Belladonna applies XOR encryption at the pixel level to selected layers, mixing these with noise patterns derived from the secret key. This creates an additional level of obfuscation for sensitive elements of your artwork. The encrypted layers are blended seamlessly into the original composition to preserve its appearance.
 
-**Alpha Channel Obfuscation**
+**Pixel Data Obfuscation**
    
-  The plugin embeds encrypted noise into the alpha channel, which influences the transparency information in a way that is imperceptible to the human eye but disrupts typical AI preprocessing pipelines.
+  The plugin shuffles around the RBG values in a way that is imperceptible to the human eye, but disrupts the generative processing capabilities of the AI model.
 
 **Metadata Watermarking**
    
@@ -45,5 +45,7 @@ Since Photoshop 23.5.5
 
 
 ## Documentation
+
+NOTE: No matter what level of sophistication this Photoshop plug-in achieves in the future, it cannot guarantee your work full protection from being scraped, used in AI training databases, or successfully mimicked by an AI model. This is simply a preventative tool that somehow managed to kinda work.
 
 ![BDComparison copy](https://github.com/user-attachments/assets/144ab6c2-c0ce-4660-b65d-a72aa01b42b1)
